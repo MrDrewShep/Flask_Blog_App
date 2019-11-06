@@ -2,6 +2,8 @@
 
 .vscode/
 venv/
+how_i_built_this.txt
+testing.py
 
 # Created by https://www.gitignore.io/api/flask
 # Edit at https://www.gitignore.io/?templates=flask

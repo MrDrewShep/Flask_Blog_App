@@ -1,7 +1,0 @@
-from powershell
-    in order to connect to postgresql, needed to install some packages
-    >> pip install psycopg2-binary Flask-SQLAlchemy Flask-Migrate
-
-    If I want to use PostgreSQL, I need someone that talks SQL. Thus comes SQLAlchemy and these other tools
-
-    
