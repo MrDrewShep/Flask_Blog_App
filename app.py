@@ -12,7 +12,7 @@ app.register_blueprint(auth_blueprint, url_prefix="/auth")
 # Any other routes here
 @app.route('/')
 def hello():
-    return 'HELLO TEST'
+    return 'HELLO DREW'
 
 if __name__ == "__main__":
     app.run()
