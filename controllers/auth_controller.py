@@ -1,4 +1,8 @@
 from flask import Blueprint, request
+from flask_jwt_extended import create_access_token
+from services import bcrypt
+from services.user_service import create_user
+from models.user import User
 
 auth_blueprint = Blueprint('auth_api', __name__)
 
@@ -9,10 +13,21 @@ def login():
     # Body: { username, password }
     # Return: { auth_token }
     body = request.json
-    print(body['email'], body['password'])
-    return {
-        'auth_token': 'qwertyuio1234567890'
-    }
+    to_check = User.query.filter_by(email=body["email"]).first()
+    
+    if bcrypt.check_password_hash(to_check.password, body["password"]):
+        # Create JWT token and return it
+        access_token = create_access_token(identity=to_check.id)
+        message = {
+            "message": "Hey, you logged in.",
+            "token": access_token
+        }
+    else:
+        message = {
+            "message": "Incorrect password."
+        }
+    
+    return message
 
 # logout route
 @auth_blueprint.route('/logout', methods=['POST'])
@@ -28,9 +43,12 @@ def register():
     # Return: { message }
 
     body = request.json
-
-    print(body['email'], body['password'], body['f_name'], body['l_name'])
+    message = create_user(
+        body['email'],
+        bcrypt.generate_password_hash(body['password']).decode('utf-8'),
+        body['f_name'],
+        body['l_name'])
 
     return {
-        'message': 'User successfully created!'
+        "message": message
     }
