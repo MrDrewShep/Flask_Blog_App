@@ -1,0 +1,23 @@
+Challenge for the weekend:
+
+blog/user/{id} – fetches all blog posts created by a single user [GET]
+
+	Create our Comment model with the following columns:				(Model)
+    • id		- integer
+    • content		- long string
+    • blog_post	- foreign key for blog commenting on
+    • user_id		- foreign key for user making the commenting
+    • created_at	- datetime
+    • last_modified	- datetime
+
+	Create service functions that provide CRUD functionality				(Service)
+    • create_comment(content, blog_id, user_id)
+        ◦ creates our comment and saves it
+    • delete_comment(id)
+        ◦ deletes a comment
+    • grab_comments(post_id)
+        ◦ grabs all comments associated with a single blog post
+
+	Create endpoints to allow CRUD functionality					(Controller)
+    • comment/new – [POST]
+    • comment/{id} – [PUT, DELETE]
